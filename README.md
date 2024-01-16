@@ -452,7 +452,9 @@ __OnionShare for anonymous hosting and sharing__
 !?[LiaScript in Moodlet](https://www.youtube.com/watch?v=yk4uEqoKcpw)
 
 
-## Classrooms
+## Classrooms-Lite
+
+<div style="width:100%;height:0;padding-bottom:75%;position:relative;"><iframe src="https://giphy.com/embed/fVPzDNORY7A3szWDil" width="100%" height="100%" style="position:absolute" frameBorder="0" class="giphy-embed" allowFullScreen></iframe></div><p><a href="https://giphy.com/gifs/fVPzDNORY7A3szWDil">via GIPHY</a></p>
 
 ### Peer^2^Peer in da Browser
 
@@ -642,4 +644,14 @@ if (LIA.classroom.connected){
 @wave(❤️) @wave(👎) @wave(👍) @wave(💀) @wave(❓)
 
 ## Remote Labs
+
+__Original Edrys:__ https://github.com/edrys-org/edrys
+
+![Original Edrys](https://raw.githubusercontent.com/edrys-org/edrys/main/docs/stations/structure.png)
+
+
+
+    {{1}}
+__Edrys-Lite:__ https://cross-lab-project.github.io/edrys-Lite/
+
 
