@@ -3,6 +3,28 @@ author: André Dietrich
 email:  andre.dietrich@informatik.tu-freiberg.de
 
 import: https://fjangfaragesh.github.io/AVR8js-mem/INCLUDE.md
+
+@style
+.fall {
+  position: absolute;
+  top: 0;
+  animation: fall 4s linear;
+}
+@keyframes fall {
+  0% { top: 0; }
+  100% { top: 100%; }
+}
+@end
+
+@wave
+<script input="button" run-once="true" modify="false">
+if (LIA.classroom.connected){
+    LIA.classroom.publish("wave", "@0")
+}
+"@0"
+</script>
+@end
+
 -->
 
 
@@ -496,19 +518,128 @@ Alice 👩‍💻 <--------'          '--------- 👨🏾‍💻 Bob
 > !?[WebRTC](https://www.youtube.com/watch?v=7cbD-hFkzY0)
 
 
-### LiaScript - Classroom
+### CRDTs
 
-go to:
+A _**C**onflict-free **R**eplicated **D**ata **T**ype_ (CRDT) is a new type of data structure[^1] that can be replicated across multiple instances in a network with the following guarantees:
 
-[Freiberg-Classroom](https://liascript.github.io/course/?https://raw.githubusercontent.com/LiaPlayground/OEB-2023/main/Classroom.md)
+    {{1}}
+1. A replica can be updated independently, concurrently and without coordinating with other replicas.
+2. Inconsistencies can be resolved automatically.
+3. Although replicas may have different state, they are guaranteed to eventually converge.
 
-select share >> Classroom >> GunDB >> Freiberg
+    {{2}}
+__Task:__ Implement an distributed counter
+
+    {{3}}
+``` ascii
+Alice 👩‍💻
+
+[0]---------*-->[5]--[+1 = 6]--------*-->[8]-- - - - - - - - - - - - 
+           /            \           /          \
+          A              V         A            \
+         /                        /              \
+[0]---[+5 = 5]-----------------[+2 = 7]-- - - - --*- - - - - - - - - -
+
+Bob 👨🏾‍💻
+```
+
+    {{4}}
+__Solution:__ Use Sets and Unions instead... 
+
+    {{5}}
+``` ascii
+Alice 👩‍💻
+
+{(a,0)}----------*-->{(a,0),(b,5)}->{(a,1),(b,5)}---*-->{(a,1),(b,7)}
+                /                         \        /   
+               A                           V      A   
+              /                                  /
+{(b,0)}---{(b,5)}----------------------------{(b,7)}-----------------
+
+Bob 👨🏾‍💻
+```
+
+    {{6}}
+<section>
+
+__ Implementations__
+
+- [Automerge](https://automerge.org)
+- [__Yjs__](https://docs.yjs.dev)
+
+</section>
+
+
+[^1]: The CRDT concept was defined in 2011 by Marc Shapiro, Nuno Preguiça, Carlos Baquero and Marek Zawirski.
+
+      See also: https://en.wikipedia.org/wiki/Conflict-free_replicated_data_type
+
+
+
+
+
+### Enter
+
+go to: [Freiberg-Classroom](https://LiaScript.github.io/course/?https://raw.githubusercontent.com/LiaPlayground/Freiberg-Research-Seminar-2024/main/README.md#22)
+
+select >> Share >> Classroom >> GunDB >> Freiberg
 
 ---
 
-[qr-code](https://liascript.github.io/course/?eyJiYWNrZW5kIjoiR1VOfGZ8aHR0cHM6Ly9wZWVyLndhbGxpZS5pby9ndW4iLCJjb3Vyc2UiOiJodHRwczovL3Jhdy5naXRodWJ1c2VyY29udGVudC5jb20vTGlhUGxheWdyb3VuZC9PRUItMjAyMy9tYWluL0NsYXNzcm9vbS5tZCIsInJvb20iOiJPRUIyMyJ9#1)
+[qr-code](https://liascript.github.io/course/?eyJiYWNrZW5kIjoiR1VOfGZ8aHR0cHM6Ly9wZWVyLndhbGxpZS5pby9ndW4iLCJjb3Vyc2UiOiJodHRwczovL3Jhdy5naXRodWJ1c2VyY29udGVudC5jb20vTGlhUGxheWdyb3VuZC9GcmVpYmVyZy1SZXNlYXJjaC1TZW1pbmFyLTIwMjQvbWFpbi9SRUFETUUubWQiLCJyb29tIjoiRnJlaWJlcmcifQ==#22)
 
 
+### Trying
+
+
+What is the name of the language you have been learning today.
+
+[[LiaScript]]
+
+Is it possible that browsers can communicate directly with each other?
+
+[(X)] Yes
+[(X)] It depends
+[( )] No
+
+#### Questions
+
+How would you rate the distributed approach?
+
+[(good)]         It is quite good
+[(ok)]           It is ok
+[(bad)]          It is bad
+[(intermediate)] Well, it depends
+[(no way)]       No way
+[(undefined)]    I don't know...
+
+---
+
+Share your feelings:
+
+<script run-once="true">
+LIA.classroom.subscribe("wave", (msg) => {
+    const icon = document.createElement("span")
+    icon.innerHTML = msg
+    icon.classList.add("fall")
+    icon.style.left=(Math.random() * 100) + "%"
+    icon.style.zIndex = 10000
+    document.body.appendChild(icon)
+    icon.addEventListener('animationend', function() {
+        icon.remove();
+    });
+})
+console.log("subscription")
+</script>
+
+<script input="button" run-once="true" modify="false">
+if (LIA.classroom.connected){
+    LIA.classroom.publish("wave", "👋")
+}
+
+"👋"
+</script>
+@wave(❤️) @wave(👎) @wave(👍) @wave(💀) @wave(❓)
 
 ## Remote Labs
 
