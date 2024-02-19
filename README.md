@@ -27,6 +27,7 @@ if (LIA.classroom.connected){
 
 -->
 
+See this talk on YouTube: https://www.youtube.com/watch?v=q_yiLNT-3cU
 
 # Freiberg Research Seminar 2024
 
